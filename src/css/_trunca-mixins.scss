@@ -1,0 +1,16 @@
+@mixin truncate-lines( $lineheight, $lines ) {
+  height: ( $lines * $lineheight ) + em;
+  line-height: $lineheight;
+  max-height: ( $lines * $lineheight ) + em;
+  overflow: hidden;
+}
+@mixin textEllipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+@mixin undoEllipsis {
+  white-space: normal;
+  text-overflow: clip;
+  overflow: visible;
+}
