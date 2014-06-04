@@ -33,3 +33,13 @@
     }
   }
 }
+
+// hide the trigger link when content is shown
+.truncate-trigger,
+.filterlist-trigger {
+  display: none;
+}
+.truncated + .truncate-trigger,
+.filtered + .filterlist-trigger {
+  display: inline-block;
+}
