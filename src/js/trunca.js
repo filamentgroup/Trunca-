@@ -16,6 +16,7 @@
     opts.classname = opts.classname || "truncate-trigger";
     opts.initclass = opts.initclass || "truncate";
     opts.truncatedclass = opts.truncatedclass || "truncated";
+    opts.allContentIsVisibleClass = opts.allContentIsVisibleClass || "visible";
 
     this.opts = opts;
     this.element = element;
@@ -40,8 +41,14 @@
     });
   };
 
-  Trunca.prototype._qualified = function() {
-    return this.element.scrollHeight > this.element.clientHeight;
+  Trunca.prototype.isTruncated = function() {
+    return this.originalHeight > this.element.clientHeight;
+  };
+
+  Trunca.prototype.hideLink = function() {
+    if( !this.isTruncated() ) {
+      $( this.element ).addClass( this.opts.allContentIsVisibleClass );
+    }
   };
 
   Trunca.prototype.init = function(){
@@ -51,12 +58,15 @@
     var $btn = this._createMarkup();
     this._bindEvents( $btn );
     this.truncated = true;
+    this.originalHeight = this.element.clientHeight;
 
     $( this.element )
       .trigger( "trunca" )
       .addClass( this.opts.truncatedclass + " " + this.opts.initclass )
       .after( $btn )
       .data( "trunca-init", this );
+
+    this.hideLink();
   };
 
   ( w.componentNamespace = w.componentNamespace || w ).Trunca = Trunca;

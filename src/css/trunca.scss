@@ -28,3 +28,8 @@
 .filtered + .filterlist-trigger {
   display: inline-block;
 }
+// hide the trigger link when the content is not tall enough for truncation
+.truncated.visible + .truncate-trigger,
+.filtered.visible + .filterlist-trigger {
+  display: none;
+}
