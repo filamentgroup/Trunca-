@@ -46,17 +46,22 @@
   };
 
   Trunca.prototype.hideLink = function() {
-    if( this.originalHeight && this.element.clientHeight && !this.isTruncated() ) {
-      $( this.element ).addClass( this.opts.allContentIsVisibleClass );
-    }
+    $( this.element )[ this.originalHeight && this.element.clientHeight && !this.isTruncated() ? "addClass" : "removeClass" ]( this.opts.allContentIsVisibleClass );
   };
 
   Trunca.prototype.refresh = function() {
-    $( this.element ).removeClass( this.opts.truncatedclass );
+    var $el = $( this.element );
+
+    if( !$el.is( "." + this.opts.truncatedclass ) ) {
+      return;
+    }
+
+    $el.removeClass( this.opts.truncatedclass );
 
     this.originalHeight = this.element.clientHeight;
+    this.element.offsetWidth;
 
-    $( this.element ).addClass( this.opts.truncatedclass );
+    $el.addClass( this.opts.truncatedclass );
 
     this.hideLink();
   };
