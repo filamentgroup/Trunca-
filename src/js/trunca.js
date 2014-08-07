@@ -46,9 +46,19 @@
   };
 
   Trunca.prototype.hideLink = function() {
-    if( !this.isTruncated() ) {
+    if( this.originalHeight && this.element.clientHeight && !this.isTruncated() ) {
       $( this.element ).addClass( this.opts.allContentIsVisibleClass );
     }
+  };
+
+  Trunca.prototype.refresh = function() {
+    $( this.element ).removeClass( this.opts.truncatedclass );
+
+    this.originalHeight = this.element.clientHeight;
+
+    $( this.element ).addClass( this.opts.truncatedclass );
+
+    this.hideLink();
   };
 
   Trunca.prototype.init = function(){

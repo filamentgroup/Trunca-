@@ -15,6 +15,9 @@
 		ul {
 			margin-top: 2em;
 		}
+		.hidden-during-init {
+			display: none;
+		}
 	</style>
 </head>
 
@@ -42,7 +45,20 @@
 	This should not show the link.
 	</div>
 
+	<div data-trunca class="hidden-during-init">
+	This was initially hidden and should not show the link.
+	</div>
+
+	<div data-trunca class="hidden-during-init">
+	This was initially hidden. This was initially hidden. This was initially hidden. This was initially hidden. This was initially hidden. This was initially hidden. This was initially hidden. This was initially hidden. This was initially hidden. This was initially hidden. 
+	</div>
+
 	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="dist/js/trunca.min.js"></script>
+	<script>
+	$( document ).ready(function() {
+		$( ".hidden-during-init" ).show().data( "trunca-init" ).refresh();
+	});
+	</script>
 </body>
 </html>
